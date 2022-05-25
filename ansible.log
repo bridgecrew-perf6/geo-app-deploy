@@ -1,0 +1,158 @@
+2022-05-25 03:47:25,100 p=16279 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2022-05-25 03:47:25,202 p=16279 u=root n=ansible | ERROR! conflicting action statements: debug, var
+
+The error appears to be in '/root/ansible/play.yml': line 9, column 8, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+       register: JV
+     - name: Check the variable JV value
+       ^ here
+
+2022-05-25 03:54:24,127 p=16878 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2022-05-25 03:54:24,396 p=16878 u=root n=ansible | ERROR! The field 'hosts' has an invalid value, which includes an undefined variable. The error was: 'TARGET' is undefined
+
+The error appears to be in '/root/ansible/play.yml': line 2, column 4, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+---
+ - hosts: "{{ TARGET }}"
+   ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2022-05-25 03:55:41,926 p=16917 u=root n=ansible | [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+2022-05-25 03:55:42,189 p=16917 u=root n=ansible | ERROR! The field 'hosts' has an invalid value, which includes an undefined variable. The error was: 'TARGET' is undefined
+
+The error appears to be in '/root/ansible/play.yml': line 2, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+---
+- hosts: "{{ TARGET }}"
+  ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2022-05-25 04:29:42,158 p=18167 u=root n=ansible | 192.168.56.95 | UNREACHABLE! => {
+    "changed": false, 
+    "msg": "Failed to connect to the host via ssh: ssh: connect to host 192.168.56.95 port 22: No route to host", 
+    "unreachable": true
+}
+2022-05-25 04:29:42,512 p=18167 u=root n=ansible | 192.168.56.96 | UNREACHABLE! => {
+    "changed": false, 
+    "msg": "Failed to connect to the host via ssh: ssh: connect to host 192.168.56.96 port 22: No route to host", 
+    "unreachable": true
+}
+2022-05-25 06:05:05,856 p=21245 u=root n=ansible | 10.0.0.212 | UNREACHABLE! => {
+    "changed": false, 
+    "msg": "Failed to connect to the host via ssh: Permission denied (publickey,password).", 
+    "unreachable": true
+}
+2022-05-25 06:06:23,462 p=21297 u=root n=ansible | 10.0.0.212 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    }, 
+    "changed": false, 
+    "ping": "pong"
+}
+2022-05-25 06:06:35,575 p=21321 u=root n=ansible | 10.0.0.212 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    }, 
+    "changed": false, 
+    "ping": "pong"
+}
+2022-05-25 15:32:04,861 p=7232 u=root n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: No JSON object could be decoded
+
+Syntax Error while loading YAML.
+  found unexpected end of stream
+
+The error appears to be in '/root/ansible/play.yml': line 25, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+          password: school1
+          dest: /tmp
+^ here
+
+2022-05-25 15:33:37,155 p=7273 u=root n=ansible | ERROR! The field 'hosts' has an invalid value, which includes an undefined variable. The error was: 'TARGET' is undefined
+
+The error appears to be in '/root/ansible/play.yml': line 2, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+---
+- hosts: "{{ TARGET }}"
+  ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2022-05-25 15:45:02,088 p=7808 u=jenkins n=ansible | PLAY [devserver] ***************************************************************
+2022-05-25 15:45:02,094 p=7808 u=jenkins n=ansible | TASK [Gathering Facts] *********************************************************
+2022-05-25 15:45:03,096 p=7808 u=jenkins n=ansible | ok: [10.0.0.212]
+2022-05-25 15:45:03,105 p=7808 u=jenkins n=ansible | TASK [Check java Version] ******************************************************
+2022-05-25 15:45:03,424 p=7808 u=jenkins n=ansible | changed: [10.0.0.212]
+2022-05-25 15:45:03,432 p=7808 u=jenkins n=ansible | TASK [Check the variable JV value] *********************************************
+2022-05-25 15:45:03,443 p=7808 u=jenkins n=ansible | ok: [10.0.0.212] => {
+    "JV": {
+        "changed": true, 
+        "cmd": "java -version", 
+        "delta": "0:00:00.038009", 
+        "end": "2022-05-25 15:45:03.395210", 
+        "failed": false, 
+        "rc": 0, 
+        "start": "2022-05-25 15:45:03.357201", 
+        "stderr": "openjdk version \"1.8.0_332\"\nOpenJDK Runtime Environment (build 1.8.0_332-b09)\nOpenJDK 64-Bit Server VM (build 25.332-b09, mixed mode)", 
+        "stderr_lines": [
+            "openjdk version \"1.8.0_332\"", 
+            "OpenJDK Runtime Environment (build 1.8.0_332-b09)", 
+            "OpenJDK 64-Bit Server VM (build 25.332-b09, mixed mode)"
+        ], 
+        "stdout": "", 
+        "stdout_lines": []
+    }
+}
+2022-05-25 15:45:03,452 p=7808 u=jenkins n=ansible | TASK [Make sure Java is installed] *********************************************
+2022-05-25 15:45:03,459 p=7808 u=jenkins n=ansible | skipping: [10.0.0.212]
+2022-05-25 15:45:03,467 p=7808 u=jenkins n=ansible | TASK [download artifact from Nexus] ********************************************
+2022-05-25 15:45:05,491 p=7808 u=jenkins n=ansible | changed: [10.0.0.212]
+2022-05-25 15:45:05,492 p=7808 u=jenkins n=ansible | PLAY RECAP *********************************************************************
+2022-05-25 15:45:05,492 p=7808 u=jenkins n=ansible | 10.0.0.212                 : ok=4    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   

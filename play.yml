@@ -1,0 +1,24 @@
+---
+- hosts: "{{ TARGET }}" 
+  ignore_errors: yes
+  tasks:
+     - name: Check java Version
+       shell: java -version
+       register: JV
+     - name: Check the variable JV value
+       debug:
+         var: JV
+     - name: Make sure Java is installed
+       yum:
+         name: "{{ JAVA_VERSION }}"
+         state: present
+       when: JV.rc != 0
+     - name: download artifact from Nexus
+       maven_artifact:
+          group_id: "{{ GROUPID }}"
+          artifact_id: "{{ ARTIFACTID }}"
+          repository_url: "{{ NEXUS_URL }}"
+          version: "{{ ARTIFACT_VERSION }}"
+          username: admin
+          password: school1
+          dest: "{{ REMOTE_DIR }}"
